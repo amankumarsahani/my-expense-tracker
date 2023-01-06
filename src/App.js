@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import AddExpenseAccordian from "./Components/AddExpenseAccordian";
+import ChartGraph from "./Components/Chart/Chart";
 import ExpenseItem from "./Components/ExpenseItem";
 import ExpenseNavbar from "./Components/ExpenseNavbar";
 
@@ -63,12 +64,16 @@ function App() {
         });
   };
 
+  const DataAmount=filterExpenseData.map((exp)=>{return exp.amount});
+  // console.log(DataAmount);
+
   return (
     <div className="App">
       <ExpenseNavbar
         handleDropdownChange={handleDropdownChange}
         year={filteryear}
       />
+      
       <div className="container">
         <AddExpenseAccordian
           handleNameChange={HandleNameChange}
@@ -76,6 +81,7 @@ function App() {
           handleDateChange={HandleDateChange}
           addNewExpenseHandler={AddNewExpenseHandler}
         />
+        <ChartGraph data={DataAmount}/>
 
         {filterExpenseData.length === 0 ? (
           <p className="text-center h5 mt-3">{`No Expense Data in ${filteryear} Found.`}</p>
